@@ -7,6 +7,11 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/Home'
   },
   {
+    path: '/Login',
+    name: '登录',
+    component: () => import("../views/User/Login.vue")
+  },
+  {
     path: '/Home',
     name: '主页',
     component: () => import("../views/Home.vue")

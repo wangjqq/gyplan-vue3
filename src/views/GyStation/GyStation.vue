@@ -7,7 +7,7 @@
 
         <div class="flex-grow" />
 
-        <el-menu-item index="1">登录</el-menu-item>
+        <el-menu-item index="/Login">登录</el-menu-item>
         <el-menu-item index="1">注册</el-menu-item>
       </el-menu>
     </el-header>
