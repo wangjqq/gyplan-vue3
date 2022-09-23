@@ -2,21 +2,17 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    user: {}
+    count: 11
   },
   getters: {
-    user: state => state.user
   },
   mutations: {
-    // 设置用户信息
-    SET_USER: (state, flag) => {
-      state.user = flag;
+    increment(state) {
+      state.count++
     }
   },
   actions: {
-    setUserInfo({ commit }, flag) {
-      commit('SET_USER', flag);
-    }
+
   },
   modules: {
   }

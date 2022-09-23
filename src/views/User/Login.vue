@@ -77,7 +77,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (data.status == 200) {
     setTimeout(() => {
       loading.close()
-      router.replace('/Home/UsersList')
+      router.replace('/Login')
       ElMessage({
         message: `注册成功`,
         type: 'success'
@@ -135,6 +135,7 @@ async function getcode() {
   // console.log(data)
   // console.log(encodeURIComponent(data))
   imageUrl.value = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(data)
+  console.log(imageUrl.value)
 }
 getcode()
 </script>
