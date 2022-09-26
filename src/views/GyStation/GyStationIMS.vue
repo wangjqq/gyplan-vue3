@@ -9,7 +9,7 @@
     <el-col :span="1">
       <el-button type="primary" @click="getAllImsList1(), (chooesType = [])">显示全部</el-button>
     </el-col>
-    <p>{{ test1 }}</p>
+    <p>{{ pinia.name }}</p>
   </el-row>
   <el-table :data="ImsList" style="width: 100%" border :row-class-name="tableRowClassName">
     <el-table-column prop="id" sortable label="id" width="70" header-align="center" align="center"> </el-table-column>
@@ -131,47 +131,8 @@ import { defineComponent, ref, reactive, computed } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getAllImsList, getImsListByType, getTypeList, addItemType, addItem } from '@/api/GyStation'
 
-import { useStore, mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-const store = useStore()
-// store.commit('increment')
-// console.log(store.state.count)
-let test1 = ref(0)
-test1 = store.state.User.count
-// test = store.state.count
-// test = store.getters.getTodoById()
-console.log(performance.getEntriesByName('first-contentful-paint')[0])
-console.log(performance.getEntriesByName('first-contentful-paint')[0])
-// const test1 = computed(() => {
-//   mapState(()=>{
-
-//   })
-//   // 映射 this.count 为 store.state.count
-//   'count'
-// ])
-// })
-document.addEventListener('DOMContentLoaded', event => {
-  console.log('first contentful painting')
-})
-
-// const isLoading = computed(mapGetters(['doneTodos']).doneTodos.bind({ store }))
-
-// console.log(isLoading)
-// const isLoading = computed(mapGetters(['getLoading']).getLoading.bind({ store }))
-
-// computed(() => {
-//   mapState({
-//     // 箭头函数可使代码更简练
-//     count: state => state.count,
-
-//     // 传字符串参数 'count' 等同于 `state => state.count`
-//     countAlias: 'count',
-
-//     // 为了能够使用 `this` 获取局部状态，必须使用常规函数
-//     countPlusLocalState(state) {
-//       return state.count + this.localCount
-//     }
-//   })
-// })
+import { PiniaStore } from '../../store/pinia'
+const pinia = PiniaStore()
 
 const ImsList = ref([])
 const ImsOptions = ref([])
