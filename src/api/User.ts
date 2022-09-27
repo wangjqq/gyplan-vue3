@@ -30,12 +30,20 @@ export function getCaptacha() {
     })
 }
 
-//获取用户收藏列表
-export function getCollectList(params: any) {
+// 获取用户是否登录
+export function isLogin() {
 
     return request({
         method: 'get',
-        url: <string>'/CollectPlay/getCollectList',
-        params,
+        url: <string>'/user/islogin',
+    })
+}
+
+// 退出登录
+export function logOut() {
+
+    return request({
+        method: 'post',
+        url: <string>'/user/logout',
     })
 }
