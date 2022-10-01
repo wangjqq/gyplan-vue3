@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,9 +11,21 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/User/Login.vue")
   },
   {
+    path: '/Register',
+    name: '注册',
+    component: () => import("../views/User/Register.vue")
+  },
+  {
     path: '/Home',
     name: '主页',
-    component: () => import("../views/Home.vue")
+    component: () => import("../views/Home.vue"),
+    children: [
+      {
+        path: '/UserCenter',
+        name: '个人中心',
+        component: () => import("../views/User/UserCenter.vue")
+      },
+    ]
   },
   {
     path: '/GyStation',

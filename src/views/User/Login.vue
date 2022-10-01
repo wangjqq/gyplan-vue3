@@ -3,6 +3,7 @@
     <el-header>
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false" @select="handleSelect" router>
         <el-menu-item index="/Home"><img src="../../assets/imgs/logo.png" alt="" /></el-menu-item>
+        <el-menu-item index="/Login" style="font-size: 20px">登录</el-menu-item>
         <div class="flex-grow" />
         <el-menu-item index="/Home">首页</el-menu-item>
       </el-menu>
@@ -156,7 +157,7 @@ getcode()
 
 const goRegister = () => {
   // router.push()
-  router.push('/Home')
+  router.push('/Register')
 }
 </script>
     
