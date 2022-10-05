@@ -25,7 +25,7 @@ request.interceptors.response.use(
   (error) => {
     ElMessage({
       showClose: true,
-      message: error.message,
+      message: '网络错误,请刷新重试 ' + error.message,
       type: 'error',
     })
     return Promise.reject(error);

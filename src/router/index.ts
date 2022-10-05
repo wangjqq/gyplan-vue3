@@ -25,20 +25,19 @@ const routes: Array<RouteRecordRaw> = [
         name: '个人中心',
         component: () => import("../views/User/UserCenter.vue")
       },
-    ]
-  },
-  {
-    path: '/GyStation',
-    name: '顾渊工作站',
-    component: () => import("../views/GyStation/GyStation.vue"),
-    children: [
       {
-        path: '/GyStation/GyStationIMS',
+        path: '/GyStationIMS',
         name: '元器件管理系统',
         component: () => import("../views/GyStation/GyStationIMS.vue")
+      },
+      {
+        path: '/Arithmetic',
+        name: '顾渊知识站',
+        component: () => import("../views/GyKnowledge/Arithmetic.vue")
       }
     ]
-  }
+  },
+
 ]
 
 const router = createRouter({

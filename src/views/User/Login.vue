@@ -1,7 +1,8 @@
 <template>
   <el-container>
     <el-header>
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false" @select="handleSelect" router>
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
+        @select="handleSelect" router>
         <el-menu-item index="/Home"><img src="../../assets/imgs/logo.png" alt="" /></el-menu-item>
         <el-menu-item index="/Login" style="font-size: 20px">登录</el-menu-item>
         <div class="flex-grow" />
@@ -13,15 +14,19 @@
       <div>
         <div class="from-box">
           <div class="login-title">账号登录</div>
-          <el-form ref="ruleFormRef" class="login-from" label-position="right" :model="formLabelAlign" style="max-width: 400px" :rules="rules" :hide-required-asterisk="true">
+          <el-form ref="ruleFormRef" class="login-from" label-position="right" :model="formLabelAlign"
+            style="max-width: 400px" :rules="rules" :hide-required-asterisk="true">
             <el-form-item label="" prop="username">
-              <el-input size="default" maxlength="18" v-model="formLabelAlign.username" style="height: 50px" placeholder="手机号/邮件地址/帐号名" :prefix-icon="User" />
+              <el-input size="default" maxlength="18" v-model="formLabelAlign.username" style="height: 50px"
+                placeholder="手机号/邮件地址/帐号名" :prefix-icon="User" />
             </el-form-item>
             <el-form-item label="" prop="password">
-              <el-input size="default" maxlength="18" type="password" v-model="formLabelAlign.password" show-password style="height: 50px" placeholder="密码" :prefix-icon="Lock" />
+              <el-input size="default" maxlength="18" type="password" v-model="formLabelAlign.password" show-password
+                style="height: 50px" placeholder="密码" :prefix-icon="Lock" />
             </el-form-item>
             <el-form-item label="" prop="code">
-              <el-input placeholder="验证码" v-model="formLabelAlign.code" style="width: 40%; float: left; height: 50px" :prefix-icon="Key"></el-input>
+              <el-input placeholder="验证码" v-model="formLabelAlign.code" style="width: 40%; float: left; height: 50px"
+                :prefix-icon="Key"></el-input>
               <div class="code-css" @click="getcode">
                 <img :src="imageUrl" style="width: 120px; margin-left: 20px; height: 50px" alt="code" />
               </div>
@@ -49,7 +54,7 @@ import { ref, reactive } from 'vue'
 import { setToken } from '../../utils/auth'
 import { Reguser, getCaptacha, Login } from '../../api/User'
 import type { FormInstance, FormRules } from 'element-plus'
-import { log } from 'console'
+
 const router = useRouter()
 let codeFlag = ref(true)
 let formLabelAlign = reactive({ username: '', password: '', code: '' })
@@ -151,7 +156,7 @@ async function getcode() {
   // console.log(data)
   // console.log(encodeURIComponent(data))
   imageUrl.value = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(data)
-  console.log(imageUrl.value)
+  // console.log(imageUrl.value)
 }
 getcode()
 
@@ -171,12 +176,14 @@ const goRegister = () => {
   background-image: url('../../assets/imgs/background_login.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+
   .pic {
     width: 658px;
     height: 485px;
     background-image: url('../../assets/imgs/login.webp');
     margin-right: 200px;
   }
+
   .from-box {
     background-color: #fff;
     border-radius: 5px;
@@ -219,22 +226,28 @@ const goRegister = () => {
     }
   }
 }
+
 .flex-grow {
   flex-grow: 1;
 }
+
 :deep(.el-menu--horizontal) {
   border-bottom: none;
 }
+
 :deep(.el-form-item__content) {
   margin-left: 22px;
 }
+
 .operation {
   display: flex;
   justify-content: center;
   align-items: center;
+
   a {
     font-size: 15px;
   }
+
   span {
     color: rgb(144, 147, 153);
     margin: 5px;
