@@ -13,7 +13,7 @@
           <template #title>顾渊知识站</template>
           <el-menu-item index="/Arithmetic">知识点/题目管理系统</el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="1">顾渊商城</el-menu-item>
+        <el-menu-item index="/ShopIndex">顾渊商城</el-menu-item>
         <el-menu-item index="1">商城管理系统</el-menu-item>
         <div class="flex-grow" />
         <el-menu-item index="/Login" v-if="loginFlag == false">你好,请登录</el-menu-item>
