@@ -35,9 +35,6 @@ request.interceptors.response.use(
 // http request 拦截器
 request.interceptors.request.use(
   (config: any) => {
-    // if (localStorage.token) { //判断token是否存在
-    // config.headers.session_key = '123';  //将token设置成请求头
-
     return config;
   },
   err => {

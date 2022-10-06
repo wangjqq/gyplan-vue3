@@ -34,6 +34,18 @@ const routes: Array<RouteRecordRaw> = [
         path: '/Arithmetic',
         name: '顾渊知识站',
         component: () => import("../views/GyKnowledge/Arithmetic.vue")
+      },
+      {
+        path: '/ShopIndex',
+        name: '顾渊商城',
+        component: () => import("../views/Shop/ShopIndex.vue"),
+        children: [
+          {
+            path: '/Shop/EmbeddedSoftware',
+            name: '嵌入式软件',
+            component: () => import("../views/Shop/EmbeddedSoftware.vue")
+          }
+        ]
       }
     ]
   },
