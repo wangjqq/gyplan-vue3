@@ -1,8 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
-        @select="handleSelect" router>
+      <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
         <el-menu-item index="/Home"><img src="../../assets/imgs/logo.png" alt="" /></el-menu-item>
         <el-menu-item index="/Login" style="font-size: 20px">登录</el-menu-item>
         <div class="flex-grow" />
