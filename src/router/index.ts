@@ -37,13 +37,24 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/ShopIndex',
+        redirect: '/Shop/EmbeddedSoftware',
         name: '顾渊商城',
         component: () => import("../views/Shop/ShopIndex.vue"),
         children: [
           {
             path: '/Shop/EmbeddedSoftware',
-            name: '嵌入式软件',
+            name: '嵌入式软件开发',
             component: () => import("../views/Shop/EmbeddedSoftware.vue")
+          },
+          {
+            path: '/Shop/PureSoftware',
+            name: '纯软件开发',
+            component: () => import("../views/Shop/PureSoftware.vue")
+          },
+          {
+            path: '/Shop/Schematic',
+            name: '原理图绘制',
+            component: () => import("../views/Shop/Schematic.vue")
           }
         ]
       }

@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'development') {
 const request = axios.create({
   // baseURL: "http://localhost:3007",
   // baseURL: "http://119.91.65.198:3000",
-  timeout: 10000,
+  timeout: 5000,
   withCredentials: true,
 })
 
