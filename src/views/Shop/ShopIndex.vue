@@ -35,15 +35,15 @@ import {
   Setting,
 } from '@element-plus/icons-vue'
 
-const defaultActive = ref('/home/archived')//默认导航
+const defaultActive = ref('/Shop/EmbeddedSoftware')//默认导航
 const menumItem = readonly([
   {
     name: '软件产业',
     icon: markRaw(Tickets),
     index: '9',
     children: [
-      { index: '/Shop/EmbeddedSoftware', title: '嵌入式软件' },
-      { index: '2', title: 'web软件' }
+      { index: '/Shop/EmbeddedSoftware', title: '嵌入式软件开发' },
+      { index: '/Shop/PureSoftware', title: '纯软件开发' }
     ]
 
   },
@@ -52,17 +52,17 @@ const menumItem = readonly([
     icon: markRaw(Cpu),
     index: '10',
     children: [
-      { index: '3', title: '原理图' },
-      { index: '4', title: 'PCB' },
+      { index: '/Shop/Schematic', title: '原理图绘制' },
+      { index: '4', title: 'PCB绘制' },
+      { index: '14', title: 'PCB打样生产' },
     ]
   },
   {
-    name: '软硬件结合产业',
+    name: '其他产业',
     icon: markRaw(Files),
     index: '12',
     children: [
-      { index: '13', title: '课程设计' },
-      { index: '14', title: '打样生产' },
+      { index: '13', title: '3D打印' },
     ]
   },
   {
