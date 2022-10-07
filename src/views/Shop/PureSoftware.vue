@@ -1,10 +1,10 @@
 <template>
 
   <div class="images">
-    <img src="../../assets/imgs/EmbeddedSoftware.png" alt="" style="margin: 0 auto;display: block;">
+    <img src="../../assets/imgs/EmbeddedSoftware3.png" alt="" style="margin: 0 auto;display: block;">
     <div style="margin: 0 auto;height: 800px;width: 1600px;">
       <img src="../../assets/imgs/EmbeddedSoftware1.png" alt="">
-      <img src="../../assets/imgs/EmbeddedSoftware2.png" alt="">
+      <img src="../../assets/imgs/EmbeddedSoftware4.png" alt="">
     </div>
   </div>
   <ToOrders></ToOrders>
