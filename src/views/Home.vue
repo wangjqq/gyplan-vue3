@@ -1,5 +1,5 @@
 <template>
-  <el-container style="width: 100vw; height: 100vh; display: flex">
+  <el-container style="height: 100vh;width: 100%;">
     <el-header style="flex-shrink: 0">
       <el-menu :default-active="activeName" class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
         <el-menu-item><img src="../assets/imgs/logo.png" alt="" /></el-menu-item>
@@ -25,12 +25,12 @@
         </el-sub-menu>
       </el-menu>
     </el-header>
-    <el-main style="height: 700px; background-color: rgb(244, 245, 245); flex: 1">
+    <el-main style="width: 100%;padding: 0; height: 100%; background-color: rgb(244, 245, 245); flex: 1">
       <Carousel v-if="router.currentRoute.value.fullPath == '/Home'"></Carousel>
       <router-view></router-view>
     </el-main>
-    <!-- <el-footer>Footer</el-footer> -->
   </el-container>
+  <Footer v-if="router.currentRoute.value.fullPath == '/Home'"></Footer>
 </template>
 <script lang="ts" setup>
 import { defineComponent, ref, reactive } from 'vue'
@@ -39,6 +39,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import router from '@/router/index'
 import { isLogin, logOut } from '@/api/User'
 import Carousel from '@/components/Carousels.vue'
+import Footer from '@/components/Footer.vue'
 
 // const router = useRouter()
 const activeName = ref('/Home')

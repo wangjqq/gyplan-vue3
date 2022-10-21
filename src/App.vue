@@ -1,6 +1,12 @@
 <template>
   <router-view />
-</template>
 
-<style lang="less">
+
+</template>
+<script lang="ts" setup>
+import { defineComponent, ref, reactive } from 'vue'
+
+</script>
+<style>
+
 </style>

@@ -1,6 +1,8 @@
 const {
   defineConfig
 } = require('@vue/cli-service')
+const path = require("path")
+const fs = require("fs")
 const CompressionPlugin = require('compression-webpack-plugin')
 module.exports = defineConfig({
 
@@ -9,8 +11,14 @@ module.exports = defineConfig({
   devServer: {
     port: 8080,
     host: 'localhost',
-    // proxy: 'http://localhost:3007' //服务器域名，80端口是默认的，可以不用配置
-    proxy: 'http://119.91.65.198:3000' //服务器域名，80端口是默认的，可以不用配置
+    proxy: 'https://wangjingqi.top:3007', //服务器域名，80端口是默认的，可以不用配置
+    // proxy: 'http://localhost:3007', //服务器域名，80端口是默认的，可以不用配置
+    https: {
+      // 配置证书
+      cert: fs.readFileSync(path.join(__dirname, "src/cert/wangjingqi.top_bundle.crt")),
+      // 配置证书密钥
+      key: fs.readFileSync(path.join(__dirname, "src/cert/wangjingqi.top.key"))
+    }
   },
   filenameHashing: true, // 默认在生成的静态资源文件名中包含hash以控制缓存
   runtimeCompiler: false, // 是否使用包含运行时编译器的 Vue 构建版本

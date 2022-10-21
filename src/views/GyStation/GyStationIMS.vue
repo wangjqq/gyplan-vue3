@@ -1,135 +1,138 @@
 <template>
-  <el-row :gutter="10">
-    <el-col :span="1">
-      <el-button type="primary" @click="addFormVisible = true">添加</el-button>
-    </el-col>
-    <el-col :span="3">
-      <el-cascader v-model="chooesType" @change="chooesTypeChange" :options="ImsOptions"
-        :props="{ expandTrigger: 'hover' }" placeholder="选择分类"></el-cascader>
-    </el-col>
-    <el-col :span="1">
-      <el-button type="primary" @click="getAllImsList1(), (chooesType = [])">显示全部</el-button>
-    </el-col>
-  </el-row>
-  <p style="font-size: 30px;position: absolute;top: 45px;left: 45%;">元器件管理系统</p>
-  <el-table :data="ImsList" style="width: 100%;margin-top: 20px;" border :row-class-name="tableRowClassName"
-    height="95.5%" empty-text="你还没有数据噢,快点击添加按钮吧!">
-    <el-table-column prop="id" sortable label="id" width="70" header-align="center" align="center"> </el-table-column>
-    <el-table-column prop="type_name" sortable label="分类" width="180" header-align="center" align="center">
-    </el-table-column>
-    <el-table-column prop="package" sortable label="封装" header-align="center" align="center"> </el-table-column>
-    <el-table-column prop="name" label="名称" header-align="center" align="center"> </el-table-column>
-    <el-table-column prop="place" label="存放地点" header-align="center" align="center"> </el-table-column>
-    <el-table-column prop="quantity" label="数量" header-align="center" align="center"> </el-table-column>
-    <el-table-column prop="description" label="描述" header-align="center" align="center"> </el-table-column>
-    <el-table-column prop="voltage" label="最大电压" header-align="center" align="center">
-      <template #default="scope">
-        <span>{{ scope.row.voltage == '' ? '' : scope.row.voltage + 'V' }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column prop="electricity" label="最大电流" header-align="center" align="center">
-      <template #default="scope">
-        <span>{{ scope.row.electricity == '' ? '' : scope.row.electricity + 'A' }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column prop="size" label="尺寸" align="center"> </el-table-column>
-    <el-table-column prop="smt" sortable label="焊接方式" header-align="center" align="center">
-      <template #default="scope">
-        <span>{{ scope.row.smt == '1' ? '贴片' : '直插' }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column prop="price" label="参考价格" header-align="center" align="center"> </el-table-column>
-  </el-table>
+  <div style="width:99.7vw">
+    <el-row :gutter="10">
+      <el-col :span="1">
+        <el-button type="primary" @click="addFormVisible = true">添加</el-button>
+      </el-col>
+      <el-col :span="3">
+        <el-cascader v-model="chooesType" @change="chooesTypeChange" :options="ImsOptions"
+          :props="{ expandTrigger: 'hover' }" placeholder="选择分类"></el-cascader>
+      </el-col>
+      <el-col :span="1">
+        <el-button type="primary" @click="getAllImsList1(), (chooesType = [])">显示全部</el-button>
+      </el-col>
+    </el-row>
+    <p style="font-size: 30px;position: absolute;top: 45px;left: 45%;">元器件管理系统</p>
+    <el-table :data="ImsList" style="width: 100%;margin-top: 20px;" border :row-class-name="tableRowClassName"
+      height="95.5%" empty-text="你还没有数据噢,快点击添加按钮吧!">
+      <el-table-column prop="id" sortable label="id" width="70" header-align="center" align="center"> </el-table-column>
+      <el-table-column prop="type_name" sortable label="分类" width="180" header-align="center" align="center">
+      </el-table-column>
+      <el-table-column prop="package" sortable label="封装" header-align="center" align="center"> </el-table-column>
+      <el-table-column prop="name" label="名称" header-align="center" align="center"> </el-table-column>
+      <el-table-column prop="place" label="存放地点" header-align="center" align="center"> </el-table-column>
+      <el-table-column prop="quantity" label="数量" header-align="center" align="center"> </el-table-column>
+      <el-table-column prop="description" label="描述" header-align="center" align="center"> </el-table-column>
+      <el-table-column prop="voltage" label="最大电压" header-align="center" align="center">
+        <template #default="scope">
+          <span>{{ scope.row.voltage == '' ? '' : scope.row.voltage + 'V' }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="electricity" label="最大电流" header-align="center" align="center">
+        <template #default="scope">
+          <span>{{ scope.row.electricity == '' ? '' : scope.row.electricity + 'A' }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="size" label="尺寸" align="center"> </el-table-column>
+      <el-table-column prop="smt" sortable label="焊接方式" header-align="center" align="center">
+        <template #default="scope">
+          <span>{{ scope.row.smt == '1' ? '贴片' : '直插' }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="price" label="参考价格" header-align="center" align="center"> </el-table-column>
+    </el-table>
 
-  <!-- 添加元器件的弹出框 -->
-  <el-dialog title="添加元器件" v-model="addFormVisible">
-    <el-form :model="addform" :rules="rules" ref="ruleFormRef">
-      <el-form-item label="元器件分类:" prop="type_id">
-        <el-cascader v-model="addform.type_id" :options="ImsOptions"></el-cascader>
-        <el-button class="el-icon-plus" @click="addTypeVisible = true" style="margin-left: 10px">新建</el-button>
-      </el-form-item>
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <el-form-item label="名称:" prop="name">
-            <el-input v-model="addform.name" style="width: 204px"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="封装:" prop="package">
-            <el-input v-model="addform.package" style="width: 204px"></el-input>
-          </el-form-item>
-        </el-col>
+    <!-- 添加元器件的弹出框 -->
+    <el-dialog title="添加元器件" v-model="addFormVisible">
+      <el-form :model="addform" :rules="rules" ref="ruleFormRef">
+        <el-form-item label="元器件分类:" prop="type_id">
+          <el-cascader v-model="addform.type_id" :options="ImsOptions"></el-cascader>
+          <el-button class="el-icon-plus" @click="addTypeVisible = true" style="margin-left: 10px">新建</el-button>
+        </el-form-item>
+        <el-row :gutter="20">
+          <el-col :span="6">
+            <el-form-item label="名称:" prop="name">
+              <el-input v-model="addform.name" style="width: 204px"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="封装:" prop="package">
+              <el-input v-model="addform.package" style="width: 204px"></el-input>
+            </el-form-item>
+          </el-col>
 
-        <el-col :span="6">
-          <el-form-item label="数量:" prop="quantity">
-            <el-input v-model="addform.quantity" style="width: 204px"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="单价:">
-            <el-input v-model="addform.price" style="width: 204px"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="尺寸:">
-            <el-input v-model="addform.size" style="width: 204px"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="最大电压(V):">
-            <el-input v-model="addform.voltage" style="width: 204px"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="最大电流(A):">
-            <el-input v-model="addform.electricity" style="width: 204px"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="存放位置:" prop="place">
-            <el-input v-model="addform.place" style="width: 204px"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <el-form-item label="焊接方式:" prop="smt">
-            <el-radio-group v-model="addform.smt">
-              <el-radio :label="1">贴片</el-radio>
-              <el-radio :label="0">直插</el-radio>
-            </el-radio-group>
-          </el-form-item>
-        </el-col>
-        <el-col :span="10">
-          <el-form-item label="描述:" style="margin-left: 20px">
-            <el-input type="textarea" :autosize="{ minRows: 3 }" v-model="addform.description" style="width: 300px">
-            </el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="addFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click=" addItem1(ruleFormRef)">确 定</el-button>
-    </div>
-  </el-dialog>
+          <el-col :span="6">
+            <el-form-item label="数量:" prop="quantity">
+              <el-input v-model="addform.quantity" style="width: 204px"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="单价:">
+              <el-input v-model="addform.price" style="width: 204px"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="尺寸:">
+              <el-input v-model="addform.size" style="width: 204px"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="最大电压(V):">
+              <el-input v-model="addform.voltage" style="width: 204px"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="最大电流(A):">
+              <el-input v-model="addform.electricity" style="width: 204px"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="存放位置:" prop="place">
+              <el-input v-model="addform.place" style="width: 204px"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="6">
+            <el-form-item label="焊接方式:" prop="smt">
+              <el-radio-group v-model="addform.smt">
+                <el-radio :label="1">贴片</el-radio>
+                <el-radio :label="0">直插</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col :span="10">
+            <el-form-item label="描述:" style="margin-left: 20px">
+              <el-input type="textarea" :autosize="{ minRows: 3 }" v-model="addform.description" style="width: 300px">
+              </el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click=" addItem1(ruleFormRef)">确 定</el-button>
+      </div>
+    </el-dialog>
 
-  <!-- 新建元器件分类的弹出框 -->
-  <el-dialog title="新建元器件分类" v-model="addTypeVisible">
-    <el-form :model="newTypeForm">
-      <el-form-item label="选择父级分类:">
-        <el-cascader v-model="newTypeForm.type_father_id" :options="ImsOptions" :props="{ checkStrictly: true }">
-        </el-cascader>
-      </el-form-item>
-      <el-form-item label="新建分类名称:">
-        <el-input v-model="newTypeForm.type_name" style="width: 204px"></el-input>
-      </el-form-item>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="addTypeVisible = false">取 消</el-button>
-      <el-button type="primary" @click=";(addTypeVisible = false), addItemType1()">确 定</el-button>
-    </div>
-  </el-dialog>
+    <!-- 新建元器件分类的弹出框 -->
+    <el-dialog title="新建元器件分类" v-model="addTypeVisible">
+      <el-form :model="newTypeForm">
+        <el-form-item label="选择父级分类:">
+          <el-cascader v-model="newTypeForm.type_father_id" :options="ImsOptions" :props="{ checkStrictly: true }">
+          </el-cascader>
+        </el-form-item>
+        <el-form-item label="新建分类名称:">
+          <el-input v-model="newTypeForm.type_name" style="width: 204px"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addTypeVisible = false">取 消</el-button>
+        <el-button type="primary" @click=";(addTypeVisible = false), addItemType1()">确 定</el-button>
+      </div>
+    </el-dialog>
+  </div>
+
 </template>
 <script lang="ts" setup>
 import { defineComponent, ref, reactive, computed } from 'vue'

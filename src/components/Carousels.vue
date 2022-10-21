@@ -1,6 +1,7 @@
 <template>
-  <el-carousel class="car" type="card"  >
-    <el-carousel-item v-for="(banner, index) in banners" :key="index" interval="4000"><img :src="banner.url" alt="banner" class="banner" @click="toUrl(banner.toUrl)" /> </el-carousel-item>
+  <el-carousel class="car" type="card">
+    <el-carousel-item v-for="(banner, index) in banners" :key="index" interval="4000"><img :src="banner.url"
+        alt="banner" class="banner" @click="toUrl(banner.toUrl)" /> </el-carousel-item>
   </el-carousel>
 </template>
 
@@ -11,19 +12,19 @@ import { defineComponent, ref, reactive } from 'vue'
 const banners = ref([
   {
     url: require('../assets/imgs/swiper1.png'),
-    toUrl: 'http://www.suolu.net/yxx/index.html#/special_info?id=10210&stage=%E6%97%A9%E6%95%99'
+    toUrl: 'https://wangjingqi.top'
   },
   {
     url: require('../assets/imgs/swiper2.png'),
-    toUrl: 'http://www.suolu.net/yxx/index.html#/special_info?id=10212&stage=%E6%97%A9%E6%95%99'
+    toUrl: 'https://wangjingqi.top'
   },
   {
     url: require('../assets/imgs/swiper3.png'),
-    toUrl: 'http://www.suolu.net/yxx/index.html#/special_info?id=10211&stage=%E5%B0%8F%E5%AD%A6'
+    toUrl: 'https://wangjingqi.top'
   },
   {
     url: require('../assets/imgs/swiper4.png'),
-    toUrl: 'http://www.suolu.net/yxx/index.html#/special_info?id=10211&stage=%E5%B0%8F%E5%AD%A6'
+    toUrl: 'https://wangjingqi.top'
   }
 ])
 </script>
@@ -33,16 +34,19 @@ const banners = ref([
   width: 100%;
   margin: 0 auto;
 }
+
 .banner {
   width: 100%;
   height: 100%;
   opacity: 0.7;
 }
+
 .car .is-active {
   /* box-shadow: 0 -10px 10px #666; */
   position: relative;
   z-index: 99;
 }
+
 .car .is-active img {
   opacity: 1;
 }

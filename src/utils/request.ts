@@ -4,9 +4,10 @@ import {
 } from 'element-plus'
 // axios.defaults.withCredentials = true;
 if (process.env.NODE_ENV === 'development') {
-  axios.defaults.baseURL = 'http://localhost:3007'
+  axios.defaults.baseURL = 'https://localhost:3007'
+  // axios.defaults.baseURL = 'https://119.91.65.198'
 } else if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = 'http://119.91.65.198:3000'
+  axios.defaults.baseURL = 'https://wangjingqi.top:3007'
 }
 const request = axios.create({
   // baseURL: "http://localhost:3007",
