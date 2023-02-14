@@ -19,9 +19,9 @@ export default class Client {
   ): Dysmsapi20170525 {
     let config = new $OpenApi.Config({
       // 必填，您的 AccessKey ID
-      accessKeyId: 'LTAI5tHX8XLSVqHQwnL3y2Fj',
+      accessKeyId: '',
       // 必填，您的 AccessKey Secret
-      accessKeySecret: 'cWbnEZ5W1xutY2ILu8Q6u7Gaa3g29',
+      accessKeySecret: '',
     })
     // 访问的域名
     config.endpoint = `dysmsapi.aliyuncs.com`
@@ -32,7 +32,7 @@ export default class Client {
     // 工程代码泄露可能会导致AccessKey泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考，建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/378664.html
     let client = Client.createClient('accessKeyId', 'accessKeySecret')
     let sendSmsRequest = new $Dysmsapi20170525.SendSmsRequest({
-      phoneNumbers: '18011312502',
+      phoneNumbers: '',
       signName: 'SMS_269425668',
     })
     try {
