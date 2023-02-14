@@ -1,13 +1,11 @@
-import axios from "axios"
-import {
-  ElMessage
-} from 'element-plus'
+import axios from 'axios'
+import { ElMessage } from 'element-plus'
 // axios.defaults.withCredentials = true;
 if (process.env.NODE_ENV === 'development') {
   axios.defaults.baseURL = 'https://localhost:3007'
-  // axios.defaults.baseURL = 'https://119.91.65.198'
+  // axios.defaults.baseURL = 'https://api.wangjingqi.top'
 } else if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = 'https://wangjingqi.top:3007'
+  axios.defaults.baseURL = 'https://api.wangjingqi.top'
 }
 const request = axios.create({
   // baseURL: "http://localhost:3007",
@@ -19,9 +17,9 @@ const request = axios.create({
 // response interceptor响应拦截器
 request.interceptors.response.use(
   (response) => {
-    const res = response.data;
+    const res = response.data
     // console.log(response.headers)
-    return res;
+    return res
   },
   (error) => {
     ElMessage({
@@ -29,18 +27,18 @@ request.interceptors.response.use(
       message: '网络错误,请刷新重试 ' + error.message,
       type: 'error',
     })
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
 // http request 拦截器
 request.interceptors.request.use(
   (config: any) => {
-    return config;
+    return config
   },
-  err => {
-    return Promise.reject(err);
+  (err) => {
+    return Promise.reject(err)
   }
-);
+)
 
-export { request };
+export { request }
