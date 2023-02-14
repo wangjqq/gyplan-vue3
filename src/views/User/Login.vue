@@ -36,7 +36,7 @@
           <div class="operation">
             <el-link type="info" style="margin-left: 5px" :underline="false" @click="goRegister">注册</el-link>
             <span>|</span>
-            <el-link type="info" :underline="false">忘记密码</el-link>
+            <el-link type="info" :underline="false" @click="sendMsg">忘记密码</el-link>
           </div>
         </div>
       </div>
@@ -51,6 +51,7 @@ import { ElForm, ElFormItem, ElInput, ElButton, ElLoading, ElMessage } from 'ele
 import { useRouter } from 'vue-router'
 import { ref, reactive } from 'vue'
 import { setToken } from '../../utils/auth'
+import  Client  from '../../utils/msg'
 import { Reguser, getCaptacha, Login } from '../../api/User'
 import type { FormInstance, FormRules } from 'element-plus'
 
@@ -162,6 +163,10 @@ getcode()
 const goRegister = () => {
   // router.push()
   router.push('/Register')
+}
+
+const sendMsg=()=>{
+  Client.main([])
 }
 </script>
     

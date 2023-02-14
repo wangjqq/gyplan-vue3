@@ -6,13 +6,15 @@
     "jsx": "preserve",
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    // "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    // "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
     "sourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "types": [
       "node",
       "webpack-env"
@@ -25,8 +27,6 @@
     "lib": [
       "esnext",
       "dom",
-      "dom.iterable",
-      "scripthost"
     ]
   },
   "include": [
