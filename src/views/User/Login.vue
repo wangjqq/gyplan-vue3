@@ -49,8 +49,9 @@
                 class="get-code"
                 bg
                 text
+                :disabled="canClick"
                 @click="getMsg1()"
-                >获取验证码</el-button
+                >{{ content }}</el-button
               >
             </el-form-item>
             <el-form-item label="" prop="code">
@@ -102,6 +103,9 @@ import { log } from "console";
 
 const router = useRouter();
 let codeFlag = ref(true);
+let content = ref("获取验证码");
+let canClick = ref(false);
+let totalTime = ref(60);
 let formLabelAlign = reactive({ phoneNumber: "", phoneCode: "", code: "" });
 let ruleFormRef = ref<FormInstance>();
 // 定义一个校验规则
@@ -130,37 +134,38 @@ let imageUrl: any = ref();
 //登录
 const submitLoginForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  await formEl.validate((valid, fields) => {
+  await formEl.validate(async (valid, fields) => {
     if (valid) {
       loading = ElLoading.service({
         lock: true,
         text: "登录中",
         background: "rgba(0, 0, 0, 0.8)",
       });
+      let formData = new FormData();
+      formData.append("phoneNumber", formLabelAlign.phoneNumber);
+      formData.append("phoneCode", formLabelAlign.phoneCode);
+      formData.append("captcha", formLabelAlign.code);
+
+      let data: any = await Login(formData);
+      if (data.status == 200) {
+        setTimeout(() => {
+          loading.close();
+          router.replace("/Home");
+          ElMessage({
+            message: `登录成功`,
+            type: "success",
+          });
+        }, 1000);
+      } else {
+        loading.close();
+        ElMessage({
+          message: `${data.message}`,
+          type: "warning",
+        });
+      }
+    } else {
     }
   });
-  let formData = new FormData();
-  formData.append("phoneNumber", formLabelAlign.phoneNumber);
-  formData.append("phoneCode", formLabelAlign.phoneCode);
-  formData.append("captcha", formLabelAlign.code);
-
-  let data: any = await Login(formData);
-  if (data.status == 200) {
-    setTimeout(() => {
-      loading.close();
-      router.replace("/Home");
-      ElMessage({
-        message: `登录成功`,
-        type: "success",
-      });
-    }, 1000);
-  } else {
-    loading.close();
-    ElMessage({
-      message: `${data.message}`,
-      type: "warning",
-    });
-  }
 };
 
 async function getcode() {
@@ -176,14 +181,26 @@ async function getcode() {
 getcode();
 
 const getMsg1 = async () => {
-  let code = "";
-  for (var i = 0; i < 6; i++) {
-    code += Math.floor(Math.random() * 10);
+  if (canClick.value) return;
+  if (!/^1[3456789]\d{9}$/.test(formLabelAlign.phoneNumber)) {
+    alert("手机号码有误，请重填");
+    return false;
   }
+  canClick.value = true;
+  content.value = totalTime.value + "s后发送";
+  let clock = window.setInterval(() => {
+    totalTime.value--;
+    content.value = totalTime.value + "s后发送";
+    if (totalTime.value < 0) {
+      window.clearInterval(clock);
+      content.value = "发送验证码";
+      totalTime.value = 60;
+      canClick.value = false;
+    }
+  }, 1000);
   let formData = new FormData();
   formData.append("phoneNumber", formLabelAlign.phoneNumber);
-  formData.append("phoneCode", code);
-  // let data: any = await getMsg(formData);
+  let data: any = await getMsg(formData);
   // console.log(data);
 };
 
@@ -214,6 +231,8 @@ const goRegister = () => {
   .from-box {
     background-color: #fff;
     border-radius: 5px;
+    padding-bottom: 10px;
+    // border: 1px solid red;
 
     & .login-title {
       height: 50px;

@@ -7,16 +7,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent, ref, reactive } from "vue";
 
-const imgUrl = ref('')
-const username = ref('')
-const local: any = window.localStorage.getItem('logindata')
-imgUrl.value = JSON.parse(local).user_pic
+const imgUrl = ref("");
+const username = ref("");
+const local: any = window.localStorage.getItem("logindata");
+imgUrl.value = JSON.parse(local).userPic;
 
-if (window.localStorage.getItem('logindata')) {
-  username.value = JSON.parse(local).username
-}
+username.value = JSON.parse(local).phoneNumber;
 </script>
 <style lang="less" scoped>
 .user-info-block {
