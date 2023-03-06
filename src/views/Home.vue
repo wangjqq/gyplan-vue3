@@ -15,7 +15,8 @@
         <!-- <el-menu-item index="/GyStation">顾渊工作站</el-menu-item> -->
         <el-sub-menu index="/GyStationIMS">
           <template #title>顾渊工作站</template>
-          <el-menu-item index="/GyStationIMS">元器件管理系统</el-menu-item>
+          <el-menu-item index="/GyStationIMS">元器件信息管理</el-menu-item>
+          <el-menu-item index="/GyStationIMS/Use">元器件使用情况</el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="/Arithmetic">
           <template #title>顾渊知识站</template>
