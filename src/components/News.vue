@@ -8,7 +8,7 @@
           </div>
           <ul>
             <li v-for="item in newsList">
-              {{ item.news_category === 'zhichang' && item.news_title }}
+              {{ item.news_category === 'zhichang' ? item.news_title : '' }}
             </li>
           </ul>
         </div>
@@ -16,11 +16,21 @@
       <el-col :span="6" :offset="2">
         <div class="content">
           <div class="title"><h2>工程师创业</h2></div>
+          <ul>
+            <li v-for="item in newsList">
+              {{ item.news_category === 'cuangye' ? item.news_title : '' }}
+            </li>
+          </ul>
         </div>
       </el-col>
       <el-col :span="6" :offset="2">
         <div class="content">
           <div class="title"><h2>工程师创意</h2></div>
+          <ul>
+            <li v-for="item in newsList">
+              {{ item.news_category === 'cuangyi' ? item.news_title : '' }}
+            </li>
+          </ul>
         </div>
       </el-col>
     </el-row>
