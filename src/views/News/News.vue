@@ -7,7 +7,7 @@
             <h2>工程师职场</h2>
           </div>
           <ul>
-            <li v-for="item in newsList">
+            <li v-for="item in newsList" @click="toNewContent(item)">
               {{ item.news_category === 'zhichang' ? item.news_title : '' }}
             </li>
           </ul>
@@ -17,7 +17,7 @@
         <div class="content">
           <div class="title"><h2>工程师创业</h2></div>
           <ul>
-            <li v-for="item in newsList">
+            <li v-for="item in newsList" @click="toNewContent(item)">
               {{ item.news_category === 'cuangye' ? item.news_title : '' }}
             </li>
           </ul>
@@ -27,7 +27,7 @@
         <div class="content">
           <div class="title"><h2>工程师创意</h2></div>
           <ul>
-            <li v-for="item in newsList">
+            <li v-for="item in newsList" @click="toNewContent(item)">
               {{ item.news_category === 'cuangyi' ? item.news_title : '' }}
             </li>
           </ul>
@@ -39,7 +39,9 @@
 <script lang="ts" setup>
 import { defineComponent, ref, reactive } from 'vue'
 import { getAllNewsList } from '@/api/News'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const newsList: any = ref([])
 
 const getList = async () => {
@@ -47,6 +49,13 @@ const getList = async () => {
   newsList.value = data
 }
 getList()
+
+const toNewContent = (item: any) => {
+  console.log(item.id)
+  router.push({
+    path: `/NewContent/${item.id}`,
+  })
+}
 </script>
 <style lang="less" scoped>
 .news {
@@ -66,7 +75,7 @@ getList()
         padding: 0;
         li {
           cursor: pointer;
-          background: url(../assets/imgs/list-icon.png) no-repeat -10px 0;
+          background: url(@/assets/imgs/list-icon.png) no-repeat -10px 0;
           line-height: 24px;
           text-indent: 15px;
           background-position: -10px -40px;

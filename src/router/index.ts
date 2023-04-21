@@ -15,11 +15,17 @@ const routes: Array<RouteRecordRaw> = [
     name: '注册',
     component: () => import('../views/User/Register.vue'),
   },
+
   {
     path: '/Home',
     name: '主页',
     component: () => import('../views/Home.vue'),
     children: [
+      {
+        path: '/NewContent/:id',
+        name: '新闻详情',
+        component: () => import('../views/News/NewContent.vue'),
+      },
       {
         path: '/UserCenter',
         name: '个人中心',

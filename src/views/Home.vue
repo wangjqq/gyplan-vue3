@@ -8,7 +8,7 @@
         :ellipsis="false"
         router>
         <el-menu-item
-          ><img src="../assets/imgs/logo.png" alt=""
+          ><img src="../assets/imgs/logo.png" @click="toHome()" alt=""
         /></el-menu-item>
         <el-menu-item index="/Home">首页</el-menu-item>
         <!-- <el-menu-item index="/GyStation">顾渊工作站</el-menu-item> -->
@@ -69,7 +69,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import router from '@/router/index'
 import { isLogin, logOut } from '@/api/User'
 import Carousel from '@/components/Carousels.vue'
-import News from '@/components/News.vue'
+import News from '@/views/News/News.vue'
 import Footer from '@/components/Footer.vue'
 
 // const router = useRouter()
@@ -115,13 +115,18 @@ const getIsLogin = async () => {
     imgUrl.value = JSON.parse(local).userPic
   }
 }
-// getIsLogin()
+getIsLogin()
 
 const loginOut = async () => {
   let data = await logOut()
   loginFlag.value = false
   window.localStorage.removeItem('logindata')
   ElMessage('已退出登录')
+  router.push('/Login')
+}
+
+const toHome = () => {
+  router.push('/Home')
 }
 </script>
 <style scoped>
