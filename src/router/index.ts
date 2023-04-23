@@ -69,6 +69,21 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        path: '/Forum',
+        name: '论坛',
+        component: () => import('../views/Forum/ForumIndex.vue'),
+      },
+      {
+        path: '/ForumList/:id',
+        name: '分类列表',
+        component: () => import('../views/Forum/ForumList.vue'),
+      },
+      {
+        path: '/ForumDetail/:forumId',
+        name: '帖子详情',
+        component: () => import('../views/Forum/ForumDetail.vue'),
+      },
     ],
   },
 ]

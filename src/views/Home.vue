@@ -22,7 +22,7 @@
           <el-menu-item index="/Arithmetic">知识点/题目管理系统</el-menu-item>
         </el-sub-menu>
         <el-menu-item index="/ShopIndex">顾渊商城</el-menu-item>
-        <el-menu-item index="1">商城管理系统</el-menu-item>
+        <el-menu-item index="/Forum">论坛</el-menu-item>
         <div class="flex-grow" />
         <el-menu-item index="/Login" v-if="loginFlag == false"
           >你好,请登录</el-menu-item
@@ -81,6 +81,7 @@ const imgUrl = ref('')
 if (router.currentRoute.value.fullPath != '/Home') {
   activeName.value = router.currentRoute.value.fullPath
 }
+
 const handleClick = (tab: TabsPaneContext, event: Event) => {
   console.log(tab.props.name, event)
   const flag: any = tab.props.name

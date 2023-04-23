@@ -15,3 +15,21 @@ export function getNewContentById(params: any) {
     params,
   })
 }
+
+// 查看新闻
+export function viewNews(data: any) {
+  return request({
+    url: '/news/viewNews',
+    method: 'post',
+    data,
+  })
+}
+
+// 点赞新闻
+export function likesNews(data: any) {
+  return request({
+    url: '/news/likesNews',
+    method: 'post',
+    data,
+  })
+}

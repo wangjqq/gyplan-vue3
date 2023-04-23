@@ -51,3 +51,12 @@ export function logOut() {
     url: <string>'/user/logout',
   })
 }
+
+// 修改信息
+export function setUserInfo(data: any) {
+  return request({
+    method: 'post',
+    url: <string>'/user/setUserInfo',
+    data,
+  })
+}
