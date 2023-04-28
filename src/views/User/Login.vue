@@ -2,9 +2,7 @@
   <el-container>
     <el-header>
       <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
-        <el-menu-item index="/Home"
-          ><img src="../../assets/imgs/logo.png" alt=""
-        /></el-menu-item>
+        <el-menu-item index="/Home"><img src="../../assets/imgs/logo.png" alt="" /></el-menu-item>
         <el-menu-item index="/Login" style="font-size: 20px">登录</el-menu-item>
         <div class="flex-grow" />
         <el-menu-item index="/Home">首页</el-menu-item>
@@ -40,16 +38,9 @@
                 style="width: 60%; float: left; height: 50px"
                 placeholder="短信验证码"
                 :prefix-icon="Lock" />
-              <el-button
-                type="primary"
-                size="large"
-                class="get-code"
-                bg
-                text
-                :disabled="canClick"
-                @click="getMsg1()"
-                >{{ content }}</el-button
-              >
+              <el-button type="primary" size="large" class="get-code" bg text :disabled="canClick" @click="getMsg1()">{{
+                content
+              }}</el-button>
             </el-form-item>
             <el-form-item label="" prop="code">
               <el-input
@@ -58,17 +49,10 @@
                 style="width: 60%; float: left; height: 50px"
                 :prefix-icon="Key"></el-input>
               <div class="code-css" @click="getcode">
-                <img
-                  :src="imageUrl"
-                  style="width: 120px; margin-left: 20px; height: 50px"
-                  alt="code" />
+                <img :src="imageUrl" style="width: 120px; margin-left: 20px; height: 50px" alt="code" />
               </div>
             </el-form-item>
-            <el-button
-              type="primary"
-              size="large"
-              class="loginbtn"
-              @click="submitLoginForm(ruleFormRef)"
+            <el-button type="primary" size="large" class="loginbtn" @click="submitLoginForm(ruleFormRef)"
               >登录</el-button
             >
           </el-form>
@@ -81,14 +65,7 @@
 
 <script lang="ts" setup>
 import { User, Lock, Key } from '@element-plus/icons-vue'
-import {
-  ElForm,
-  ElFormItem,
-  ElInput,
-  ElButton,
-  ElLoading,
-  ElMessage,
-} from 'element-plus'
+import { ElForm, ElFormItem, ElInput, ElButton, ElLoading, ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
 import { ref, reactive } from 'vue'
 import { setToken } from '../../utils/auth'
@@ -169,8 +146,7 @@ async function getcode() {
   // imageUrl.value = window.URL.createObjectURL(blob) // 将他转化为路径
   // console.log(data)
   // console.log(encodeURIComponent(data))
-  imageUrl.value =
-    'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(data)
+  imageUrl.value = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(data)
   // console.log(imageUrl.value)
 }
 getcode()
@@ -195,7 +171,12 @@ const getMsg1 = async () => {
   }, 1000)
   let formData = new FormData()
   formData.append('phoneNumber', formLabelAlign.phoneNumber)
-  let data: any = await getMsg(formData)
+  let { message }: any = await getMsg(formData)
+  ElMessage({
+    message: message,
+    type: 'success',
+    duration: 6000,
+  })
 }
 
 const goRegister = () => {

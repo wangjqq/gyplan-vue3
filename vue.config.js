@@ -1,11 +1,8 @@
-const {
-  defineConfig
-} = require('@vue/cli-service')
-const path = require("path")
-const fs = require("fs")
+const { defineConfig } = require('@vue/cli-service')
+const path = require('path')
+const fs = require('fs')
 const CompressionPlugin = require('compression-webpack-plugin')
 module.exports = defineConfig({
-
   transpileDependencies: true,
   publicPath: './', //修改目录
   devServer: {
@@ -15,10 +12,10 @@ module.exports = defineConfig({
     proxy: 'http://localhost:3007', //服务器域名，80端口是默认的，可以不用配置
     https: {
       // 配置证书
-      cert: fs.readFileSync(path.join(__dirname, "src/cert/wangjingqi.top_bundle.crt")),
+      cert: fs.readFileSync(path.join(__dirname, 'src/cert/wangjingqi.top_bundle.crt')),
       // 配置证书密钥
-      key: fs.readFileSync(path.join(__dirname, "src/cert/wangjingqi.top.key"))
-    }
+      key: fs.readFileSync(path.join(__dirname, 'src/cert/wangjingqi.top.key')),
+    },
   },
   filenameHashing: true, // 默认在生成的静态资源文件名中包含hash以控制缓存
   runtimeCompiler: false, // 是否使用包含运行时编译器的 Vue 构建版本
@@ -29,15 +26,16 @@ module.exports = defineConfig({
       config.mode = 'production'
       return {
         optimization: {
-          usedExports: true
+          usedExports: true,
         },
-        plugins: [new CompressionPlugin({
-          test: /\.js$|\.html$|\.css/, //匹配文件名
-          threshold: 10240, //对超过10k的数据进行压缩
-          deleteOriginalAssets: false //是否删除原文件
-        })]
+        plugins: [
+          new CompressionPlugin({
+            test: /\.js$|\.html$|\.css/, //匹配文件名
+            threshold: 10240, //对超过10k的数据进行压缩
+            deleteOriginalAssets: false, //是否删除原文件
+          }),
+        ],
       }
     }
   },
-
 })

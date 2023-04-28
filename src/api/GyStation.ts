@@ -45,3 +45,20 @@ export function addItem(params: any) {
     params,
   })
 }
+
+// 编辑元器件
+export function editItem(params: any) {
+  return request({
+    url: '/api/ims/editItem',
+    method: 'post',
+    params,
+  })
+}
+// 删除元器件
+export function delItem(data: any) {
+  return request({
+    url: '/api/ims/delItem',
+    method: 'post',
+    data,
+  })
+}

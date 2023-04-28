@@ -1,21 +1,14 @@
 <template>
   <el-container style="height: 100vh; width: 100%">
     <el-header style="flex-shrink: 0">
-      <el-menu
-        :default-active="activeName"
-        class="el-menu-demo"
-        mode="horizontal"
-        :ellipsis="false"
-        router>
-        <el-menu-item
-          ><img src="../assets/imgs/logo.png" @click="toHome()" alt=""
-        /></el-menu-item>
+      <el-menu :default-active="activeName" class="el-menu-demo" mode="horizontal" :ellipsis="false" router>
+        <el-menu-item><img src="../assets/imgs/logo.png" @click="toHome()" alt="" /></el-menu-item>
         <el-menu-item index="/Home">首页</el-menu-item>
         <!-- <el-menu-item index="/GyStation">顾渊工作站</el-menu-item> -->
         <el-sub-menu index="/GyStationIMS">
           <template #title>顾渊工作站</template>
           <el-menu-item index="/GyStationIMS">元器件信息管理</el-menu-item>
-          <el-menu-item index="/GyStationIMS/Use">元器件使用情况</el-menu-item>
+          <!-- <el-menu-item index="/GyStationIMS/Use">元器件使用情况</el-menu-item> -->
         </el-sub-menu>
         <el-sub-menu index="/Arithmetic">
           <template #title>顾渊知识站</template>
@@ -24,35 +17,18 @@
         <el-menu-item index="/ShopIndex">顾渊商城</el-menu-item>
         <el-menu-item index="/Forum">论坛</el-menu-item>
         <div class="flex-grow" />
-        <el-menu-item index="/Login" v-if="loginFlag == false"
-          >你好,请登录</el-menu-item
-        >
+        <el-menu-item index="/Login" v-if="loginFlag == false">你好,请登录</el-menu-item>
         <el-sub-menu index="/Login" v-if="loginFlag == true" class="user">
           <template #title
-            ><img
-              :src="imgUrl"
-              alt=""
-              style="width: 40px; height: 40px" />欢迎你!
-            {{ username }}</template
+            ><img :src="imgUrl" alt="" style="width: 40px; height: 40px" />欢迎你! {{ username }}</template
           >
           <el-menu-item index="/UserCenter">个人中心</el-menu-item>
-          <el-menu-item index="/Home" @click="loginOut()"
-            >退出登录</el-menu-item
-          >
+          <el-menu-item index="/Home" @click="loginOut()">退出登录</el-menu-item>
         </el-sub-menu>
       </el-menu>
     </el-header>
-    <el-main
-      style="
-        width: 100%;
-        padding: 0;
-        height: 100%;
-        background-color: rgb(244, 245, 245);
-        flex: 1;
-      "
-      ><div
-        class="carousel"
-        v-if="router.currentRoute.value.fullPath == '/Home'">
+    <el-main style="width: 100%; padding: 0; height: 100%; background-color: rgb(244, 245, 245); flex: 1"
+      ><div class="carousel" v-if="router.currentRoute.value.fullPath == '/Home'">
         <Carousel></Carousel>
         <News></News>
       </div>
@@ -92,17 +68,13 @@ const getIsLogin = async () => {
   let time = 5
   if (data.status == 202 || data.status == 201) {
     loginFlag.value = false
-    ElMessageBox.alert(
-      `您还未登录,登陆后即可使用本站全部功能,${time}秒后将为您自动跳转至登陆页面.`,
-      '提示',
-      {
-        confirmButtonText: '去登录',
-        callback: (action: Action) => {
-          clearTimeout(timer1)
-          router.push('/Login')
-        },
-      }
-    )
+    ElMessageBox.alert(`您还未登录,登陆后即可使用本站全部功能,${time}秒后将为您自动跳转至登陆页面.`, '提示', {
+      confirmButtonText: '去登录',
+      callback: (action: Action) => {
+        clearTimeout(timer1)
+        router.push('/Login')
+      },
+    })
 
     let timer1 = setTimeout(() => {
       ElMessageBox.close()

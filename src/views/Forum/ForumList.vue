@@ -2,31 +2,19 @@
   <div class="content">
     <header>
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/Forum' }"
-          >论坛主页</el-breadcrumb-item
-        >
-        <el-breadcrumb-item>{{ type.name }}</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/Forum' }">论坛主页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: `/ForumList/${type.id}` }"> {{ type.name }}</el-breadcrumb-item>
       </el-breadcrumb>
     </header>
     <body>
       <div class="title">
         <el-Space
-          ><span
-            :style="styleObject0"
-            @click="checkList(0)"
-            style="margin-right: 10px"
-            >最新主题</span
-          >
-          <span :style="styleObject1" @click="checkList(1)"
+          ><span :style="styleObject0" @click="checkList(0)" style="margin-left: 10px; font-size: 20px">最新主题</span>
+          <!-- <span :style="styleObject1" @click="checkList(1)"
             ><el-icon :size="20"><GoldMedal /></el-icon>精华</span
-          ></el-Space
-        >
-        <el-button
-          type="primary"
-          style="position: absolute; right: 0; top: 10px"
-          @click="getNew()"
-          >发新帖</el-button
-        >
+          > -->
+        </el-Space>
+        <el-button type="primary" style="position: absolute; right: 0; top: 10px" @click="getNew()">发新帖</el-button>
       </div>
       <div class="content1" v-for="item in list">
         <p class="content1-title" @click="toDetail(item.id)">
@@ -39,9 +27,7 @@
             <p>{{ myformatdate(item.creationTime) }} 发布</p>
             <p v-if="item.lastReplyName">⬅</p>
             <p v-if="item.lastReplyName">@{{ item.lastReplyName }}</p>
-            <p v-if="item.lastReplyName">
-              {{ myformatdate(item.lastReplyTime) }} 回复
-            </p>
+            <p v-if="item.lastReplyName">{{ myformatdate(item.lastReplyTime) }} 回复</p>
           </el-Space>
         </div>
       </div>
@@ -50,10 +36,7 @@
 
   <el-dialog v-model="dialogVisible" title="你好!" width="30%">
     <span>发帖前请先设置昵称噢~</span>
-    <el-input
-      style="margin: 10px 0"
-      v-model="nickName"
-      placeholder="请输入昵称" />
+    <el-input style="margin: 10px 0" v-model="nickName" placeholder="请输入昵称" />
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
@@ -79,14 +62,14 @@
           v-model="ruleForm.content"
           :autosize="{ minRows: 1, maxRows: 6 }"
           type="textarea"
+          show-word-limit
+          maxlength="3000"
       /></el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible1 = false">取消</el-button>
-        <el-button type="primary" @click="submitForm(ruleFormRef)">
-          提交
-        </el-button>
+        <el-button type="primary" @click="submitForm(ruleFormRef)"> 提交 </el-button>
       </span>
     </template>
   </el-dialog>
@@ -110,11 +93,11 @@ const ruleForm = reactive({
 const rules = reactive<FormRules>({
   title: [
     { required: true, message: '请输入标题', trigger: 'blur' },
-    { min: 7, max: 100, message: '请输入7-100字符', trigger: 'blur' },
+    { min: 7, max: 50, message: '请输入7-50字符', trigger: 'blur' },
   ],
   content: [
     { required: true, message: '请输入内容', trigger: 'blur' },
-    { min: 7, max: 300, message: '请输入7-300字符', trigger: 'blur' },
+    { min: 7, max: 3000, message: '请输入7-3000字符', trigger: 'blur' },
   ],
 })
 const dialogVisible = ref(false)
@@ -209,6 +192,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       formData.append('content', ruleForm.content)
       formData.append('authorId', userInfo.id)
       formData.append('authorName', userInfo.nickName)
+      formData.append('authorPic', userInfo.userPic)
       formData.append('creationTime', myDate.toLocaleString())
       await addForum(formData)
       getList()
