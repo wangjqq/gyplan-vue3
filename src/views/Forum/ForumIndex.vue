@@ -76,17 +76,17 @@
               <span>单片机/MCU</span>
               <span>帖子:{{ typeList[2].number }}</span>
             </el-space>
-            <div style="font-size: 12px; color: #858585">有趣新颖的单片机作品，提高设计技能！</div>
+            <div style="font-size: 12px; color: #858585">有趣新颖的单片机作品，提高设计技能</div>
           </div>
         </el-col>
         <el-col :offset="4" :span="8" style="display: flex; cursor: pointer" @click="toList(4)">
           <img src="@/assets/forum/4.png" width="66" height="66" />
           <div style="margin: 10px">
             <el-space>
-              <span>智能设备</span>
+              <span>书籍学习与讨论</span>
               <span>帖子:{{ typeList[3].number }}</span>
             </el-space>
-            <div style="font-size: 12px; color: #858585">讨论IoT智能设备安全威胁及防护技术</div>
+            <div style="font-size: 12px; color: #858585">来一起讨论硬件类书籍吧</div>
           </div>
         </el-col>
       </el-row>
@@ -95,20 +95,22 @@
           <img src="@/assets/forum/5.png" width="66" height="66" />
           <div style="margin: 10px">
             <el-space>
-              <span>iOS安全</span>
+              <span>物联网技术论坛</span>
               <span>帖子:{{ typeList[4].number }}</span>
             </el-space>
-            <div style="font-size: 12px; color: #858585">iOS越狱、逆向技术交流</div>
+            <div style="font-size: 12px; color: #858585">Zigbee、蓝牙、RFID、WiFi、射频无线物联网技术</div>
           </div>
         </el-col>
         <el-col :offset="4" :span="8" style="display: flex; cursor: pointer" @click="toList(6)">
           <img src="@/assets/forum/6.png" width="66" height="66" />
           <div style="margin: 10px">
             <el-space>
-              <span>密码应用</span>
+              <span>Altium Protel论坛</span>
               <span>帖子:{{ typeList[5].number }}</span>
             </el-space>
-            <div style="font-size: 12px; color: #858585">密码学算法在安全方面的应用</div>
+            <div style="font-size: 12px; color: #858585">
+              Altium Protel DXP 99e PCB设计软件功能讨论，layout布局布线经验交流
+            </div>
           </div>
         </el-col>
       </el-row>

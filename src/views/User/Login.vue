@@ -9,7 +9,7 @@
       </el-menu>
     </el-header>
     <el-main class="login">
-      <div class="pic"></div>
+      <!-- <div class="pic"></div> -->
       <div>
         <div class="from-box">
           <div class="login-title">账号登录</div>
@@ -118,7 +118,9 @@ const submitLoginForm = async (formEl: FormInstance | undefined) => {
       formData.append('phoneCode', formLabelAlign.phoneCode)
       formData.append('captcha', formLabelAlign.code)
 
-      let data: any = await Login(formData)
+      let data: any = await Login(formData).catch(() => {
+        loading.close()
+      })
       if (data.status == 200) {
         setTimeout(() => {
           loading.close()
@@ -192,14 +194,14 @@ const goRegister = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../../assets/imgs/background_login.jpg');
+  background-image: url('../../assets/imgs/background_login.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
 
   .pic {
-    width: 658px;
-    height: 485px;
-    background-image: url('../../assets/imgs/login.webp');
+    width: 500px;
+    height: 500px;
+    background-image: url('../../assets/imgs/login.jpg');
     margin-right: 200px;
   }
 
@@ -208,6 +210,8 @@ const goRegister = () => {
     border-radius: 5px;
     padding-bottom: 10px;
     // border: 1px solid red;
+    margin-left: 70%;
+    width: 460px;
 
     & .login-title {
       height: 50px;

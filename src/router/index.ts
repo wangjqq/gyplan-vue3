@@ -64,8 +64,18 @@ const routes: Array<RouteRecordRaw> = [
           },
           {
             path: '/Shop/Schematic',
-            name: '原理图绘制',
+            name: '嵌入式硬件开发',
             component: () => import('../views/Shop/Schematic.vue'),
+          },
+          {
+            path: '/Shop/Printing',
+            name: '3d打印',
+            component: () => import('../views/Shop/Printing.vue'),
+          },
+          {
+            path: '/Shop/Order',
+            name: '下单',
+            component: () => import('../views/Shop/Order.vue'),
           },
         ],
       },

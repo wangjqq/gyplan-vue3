@@ -8,8 +8,8 @@ module.exports = defineConfig({
   devServer: {
     port: 8080,
     host: 'localhost',
-    // proxy: 'https://wangjingqi.top', //服务器域名，80端口是默认的，可以不用配置
-    proxy: 'http://localhost:3007', //服务器域名，80端口是默认的，可以不用配置
+    proxy: 'https://wangjingqi.top', //服务器域名，80端口是默认的，可以不用配置
+    // proxy: 'http://localhost:3007', //服务器域名，80端口是默认的，可以不用配置
     https: {
       // 配置证书
       cert: fs.readFileSync(path.join(__dirname, 'src/cert/wangjingqi.top_bundle.crt')),
