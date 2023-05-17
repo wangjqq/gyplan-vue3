@@ -29,7 +29,11 @@
       </el-table-column>
       <el-table-column prop="my_answer" label="我的答案" width="180" header-align="center" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="createdTime" label="创建时间" width="200" header-align="center"> </el-table-column>
+      <el-table-column prop="createdTime" label="创建时间" width="200" header-align="center">
+        <template #default="scope">
+          {{ myformatdate(scope.row.createdTime) }}
+        </template>
+      </el-table-column>
     </el-table>
     <div v-else>
       <!-- <el-cascader v-model="form.knowledgeType" :options="knowledgeOptions" placeholder="选择知识点分类"></el-cascader> -->
@@ -45,7 +49,11 @@
           header-align="center"
           show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="createdTime" label="创建时间" width="220" header-align="center"> </el-table-column>
+        <el-table-column prop="createdTime" label="创建时间" width="220" header-align="center">
+          <template #default="scope">
+            {{ myformatdate(scope.row.createdTime) }}
+          </template>
+        </el-table-column>
       </el-table>
     </div>
 
@@ -145,35 +153,55 @@
 
     <!-- 点击知识的弹出框 -->
     <el-dialog title="知识详情" v-model="knowledgeDetailPageVisible">
-      <el-form :model="knowledgeDetail">
-        <el-form-item label="知识ID:">
-          {{ knowledgeDetail.id }}
-        </el-form-item>
-        <div>
-          <el-form-item label="题目名称:">
-            <el-input v-model="knowledgeDetail.name" style="width: 204px"></el-input>
+      <div v-if="!knowledgeDetail.is_knowledge_point">
+        <el-form :model="knowledgeDetail">
+          <el-form-item label="知识ID:">
+            {{ knowledgeDetail.id }}
           </el-form-item>
-          <el-form-item label="创建时间:">
-            {{ knowledgeDetail.createdTime }}
+          <div>
+            <el-form-item label="题目名称:">
+              <el-input v-model="knowledgeDetail.name" style="width: 204px"></el-input>
+            </el-form-item>
+            <el-form-item label="创建时间:">
+              {{ knowledgeDetail.createdTime }}
+            </el-form-item>
+            <el-form-item label="题目状态:">
+              <el-rate v-model="knowledgeDetail.state" show-text :texts="stateTexts"></el-rate>
+            </el-form-item>
+            <el-form-item label="题目难度:">
+              <el-rate v-model="knowledgeDetail.difficulty" show-text :texts="difficultyTexts"></el-rate>
+            </el-form-item>
+            <el-form-item label="题目描述:">
+              <el-input type="textarea" autosize placeholder="请输入内容" v-model="knowledgeDetail.description">
+              </el-input>
+            </el-form-item>
+            <el-form-item label="我的答案:">
+              <el-input type="textarea" autosize placeholder="请输入内容" v-model="knowledgeDetail.my_answer">
+              </el-input>
+            </el-form-item>
+            <el-form-item label="题目答案:">
+              <el-input type="textarea" autosize placeholder="请输入内容" v-model="knowledgeDetail.answer"> </el-input>
+            </el-form-item>
+          </div>
+        </el-form>
+      </div>
+      <div v-else>
+        <el-form :model="knowledgeDetail">
+          <el-form-item label="知识ID:">
+            {{ knowledgeDetail.id }}
           </el-form-item>
-          <el-form-item label="题目状态:">
-            <el-rate v-model="knowledgeDetail.state" show-text :texts="stateTexts"></el-rate>
-          </el-form-item>
-          <el-form-item label="题目难度:">
-            <el-rate v-model="knowledgeDetail.difficulty" show-text :texts="difficultyTexts"></el-rate>
-          </el-form-item>
-          <el-form-item label="题目描述:">
-            <el-input type="textarea" autosize placeholder="请输入内容" v-model="knowledgeDetail.description">
-            </el-input>
-          </el-form-item>
-          <el-form-item label="我的答案:">
-            <el-input type="textarea" autosize placeholder="请输入内容" v-model="knowledgeDetail.my_answer"> </el-input>
-          </el-form-item>
-          <el-form-item label="题目答案:">
-            <el-input type="textarea" autosize placeholder="请输入内容" v-model="knowledgeDetail.answer"> </el-input>
-          </el-form-item>
-        </div>
-      </el-form>
+          <div>
+            <el-form-item label="知识点名称:">
+              <el-input type="textarea" autosize placeholder="请输入内容" v-model="knowledgeDetail.key_point_name">
+              </el-input>
+            </el-form-item>
+            <el-form-item label="知识点内容:">
+              <el-input type="textarea" autosize placeholder="请输入内容" v-model="knowledgeDetail.key_point_content">
+              </el-input>
+            </el-form-item>
+          </div>
+        </el-form>
+      </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="knowledgeDetailPageVisible = false">取 消</el-button>
         <el-button type="primary" @click="addDataStructure1(1), (knowledgeDetailPageVisible = false)"
@@ -242,6 +270,19 @@ watch(
   },
   { deep: true }
 )
+
+function myformatdate(inputTime: any) {
+  if (!inputTime && typeof inputTime !== 'number') {
+    return ''
+  }
+  var localTime = ''
+  inputTime = new Date(inputTime).getTime()
+  const offset = new Date().getTimezoneOffset()
+  localTime = new Date(inputTime - offset * 60000).toISOString()
+  localTime = localTime.substr(0, localTime.lastIndexOf('.'))
+  localTime = localTime.replace('T', ' ')
+  return localTime
+}
 
 // 获取算法/数据结构数据列表
 const getDataStructureList1 = async () => {
@@ -317,6 +358,9 @@ const addDataStructure1 = async (val: any) => {
     form.value = knowledgeDetail.value
   }
   let params = form.value
+  const local: any = window.localStorage.getItem('logindata')
+  const id = JSON.parse(local).id
+  params.userId = id
   let data = await addDataStructure(params)
   if (data.status == 200) {
     getDataStructureList1()
