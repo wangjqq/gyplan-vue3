@@ -4,7 +4,7 @@
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
     </el-select>
     <el-button type="primary" @click="dialogFormVisible = true" class="addBtn">添加</el-button>
-    <p style="font-size: 30px; position: absolute; top: 45px; left: 45%">知识点/题目管理系统</p>
+    <p style="font-size: 30px; position: absolute; top: 70px; left: 45%">知识点/题目管理系统</p>
 
     <el-table
       v-if="structureListDataNew[0].is_knowledge_point == 0"

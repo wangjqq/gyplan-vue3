@@ -84,19 +84,19 @@ const send = () => {
   border-radius: 5%;
   position: relative;
   width: 600px;
-  height: 1000px;
+  height: 800px;
   margin: 0 auto;
   background-color: #fff;
 
   .title {
     color: #26b7d8;
-    width: 180px;
+    width: 150px;
     font-size: 30px;
     margin: 0 auto;
   }
 
   #content {
-    height: 910px;
+    height: 700px;
     overflow: auto;
 
     .item {
@@ -180,7 +180,7 @@ const send = () => {
 
   .inputBox {
     position: fixed;
-    bottom: 220px;
+    bottom: 40px;
     left: 50%;
   }
 }</style>

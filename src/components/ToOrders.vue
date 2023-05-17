@@ -1,10 +1,11 @@
 <template>
   <div class="orders">
-    <img src="../assets/imgs/order.gif" alt="">
+    <img src="../assets/imgs/order.gif" alt="" @click="router.push('/Shop/Order')" />
   </div>
 </template>
 <script lang="ts" setup>
 import { defineComponent, ref, reactive } from 'vue'
+import router from '@/router/index'
 </script>
 <style lang="less" scoped>
 .orders {

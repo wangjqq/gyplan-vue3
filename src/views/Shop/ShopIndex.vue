@@ -64,7 +64,7 @@ const menumItem = readonly([
     children: [
       { index: '/Shop/Order', title: '立即下单' },
       // { index: '6', title: '开票中心' },
-      { index: '7', title: '售后服务' },
+      // { index: '7', title: '售后服务' },
       // { index: '8', title: '更多服务' },
     ],
   },

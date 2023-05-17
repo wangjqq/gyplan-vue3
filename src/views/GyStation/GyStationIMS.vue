@@ -1,6 +1,6 @@
 <template>
   <div style="width: 97vw; margin: 0 20px">
-    <header style="position: fixed; top: 70px; width: 100%">
+    <header style="position: fixed; top: 110px; width: 100%">
       <el-row>
         <el-col :span="1" :offset="1">
           <el-button type="primary" @click="addFormVisible = true">添加</el-button>
